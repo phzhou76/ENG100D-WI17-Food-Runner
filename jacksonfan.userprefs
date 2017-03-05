@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Falling Food Minigame/Scripts/FallingFoodController.cs">
+    <Files>
+      <File FileName="Assets/Falling Food Minigame/Scripts/FallingFoodController.cs" Line="337" Column="2" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/SamController.cs" Line="71" Column="34" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/NutritionFacts.cs" Line="9" Column="46" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

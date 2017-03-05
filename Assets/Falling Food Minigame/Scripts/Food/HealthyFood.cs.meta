@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: feaf79f1b684f45b7bf5e223baf5508c
+timeCreated: 1458168037
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - foodAudio: {fileID: 8300000, guid: 0b3bb3f65aaa44706845ddfb9b5dce88, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
