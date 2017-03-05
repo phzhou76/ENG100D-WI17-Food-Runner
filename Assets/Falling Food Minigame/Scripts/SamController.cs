@@ -28,6 +28,7 @@ public class SamController : MonoBehaviour {
 
       //sets x position of new position to the mouse's x position in world
       newPosition.x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+      newPosition.y = Camera.main.ScreenToWorldPoint(Input.mousePosition).y; 
 
       //sets Sam's x position to the mouse position
       this.transform.position = newPosition;
@@ -55,11 +56,12 @@ public class SamController : MonoBehaviour {
     }
   }
 
-  /// <summary>
-  /// Grabs the food.
-  /// </summary>
-  /// <param name="food">Food that Sam collided with.</param>
-  private void grabFood(Food food) {
+ 
+    /// <summary>
+    /// Grabs the food.
+    /// </summary>
+    /// <param name="food">Food that Sam collided with.</param>
+    private void grabFood(Food food) {
 
     //creates an Audio Source on Sam if there isn't one already
     if (!GetComponent<AudioSource>())

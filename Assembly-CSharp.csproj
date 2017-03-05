@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{B1C9509A-FDE8-B75F-0719-D0360BC67B51}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -45,71 +46,177 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Check Minigame\Scripts\CheckBank.cs" />
-     <Compile Include="Assets\Check Minigame\Scripts\CheckGameScore.cs" />
-     <Compile Include="Assets\Check Minigame\Scripts\CheckSlots.cs" />
-     <Compile Include="Assets\Check Minigame\Scripts\Controller.cs" />
-     <Compile Include="Assets\Check Minigame\Scripts\FloatingWord.cs" />
-     <Compile Include="Assets\Check Minigame\Scripts\MouseController.cs" />
-     <Compile Include="Assets\Check Minigame\Scripts\Signature.cs" />
-     <Compile Include="Assets\Check Minigame\SetScoreFields.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\FallingFoodController.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\Food\Food.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\Food\HealthyFood.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\Food\UnhealthyFood.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\FoodScore.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\HeaderFinish.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\MonsterController.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\MyRandom.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\NutritionFacts.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\PercentScores.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\Quiz.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\QuizController.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\SamController.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\SetFoodFields.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\SpeedChanger.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\SpeedListener.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\TFButton.cs" />
-     <Compile Include="Assets\Falling Food Minigame\Scripts\Track.cs" />
-     <Compile Include="Assets\FinishButton.cs" />
-     <Compile Include="Assets\FloatDown.cs" />
-     <Compile Include="Assets\LoadScene.cs" />
-     <Compile Include="Assets\NewBehaviourScript.cs" />
-     <Compile Include="Assets\NewBehaviourScript1.cs" />
-     <Compile Include="Assets\NoDestroy.cs" />
-     <Compile Include="Assets\NutritionFact.cs" />
-     <Compile Include="Assets\Overworld\GlobalScore.cs" />
-     <Compile Include="Assets\Overworld\ScoreSetter.cs" />
-     <Compile Include="Assets\Overworld\Scripts\DialogueScript.cs" />
-     <Compile Include="Assets\Overworld\Scripts\LoadOnClicks.cs" />
-     <Compile Include="Assets\Overworld\Scripts\OverviewStart.cs" />
-     <Compile Include="Assets\Timer.cs" />
-     <Compile Include="Assets\Toothbrush Minigame\Scripts\Draggable.cs" />
-     <Compile Include="Assets\Toothbrush Minigame\Scripts\Finished.cs" />
-     <Compile Include="Assets\Toothbrush Minigame\Scripts\Teeth.cs" />
-     <Compile Include="Assets\Toothbrush Minigame\TeethScore.cs" />
-     <Compile Include="Assets\Unity Tutorial Assets\RandomFalling.cs" />
-     <Compile Include="Assets\Unity Tutorial Assets\Scripts\Despawn.cs" />
-     <Compile Include="Assets\Unity Tutorial Assets\Scripts\FollowPlayer.cs" />
-     <Compile Include="Assets\Unity Tutorial Assets\Scripts\MyFirstScript.cs" />
-     <Compile Include="Assets\Unity Tutorial Assets\Scripts\Score.cs" />
-     <Compile Include="Assets\Unity Tutorial Assets\Scripts\Test.cs" />
-     <Compile Include="Assets\Unity Tutorial Assets\Scripts\scrollFloor.cs" />
-     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
-     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
-     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
-     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
-     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
- <Reference Include="UnityEngine.Networking">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
+    <Compile Include="Assets\Check Minigame\Scripts\CheckBank.cs" />
+    <Compile Include="Assets\Check Minigame\Scripts\CheckGameScore.cs" />
+    <Compile Include="Assets\Check Minigame\Scripts\CheckSlots.cs" />
+    <Compile Include="Assets\Check Minigame\Scripts\Controller.cs" />
+    <Compile Include="Assets\Check Minigame\Scripts\FloatingWord.cs" />
+    <Compile Include="Assets\Check Minigame\Scripts\MouseController.cs" />
+    <Compile Include="Assets\Check Minigame\Scripts\Signature.cs" />
+    <Compile Include="Assets\Check Minigame\SetScoreFields.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\BrandonController.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\FallingFoodController.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\FoodScore.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\Food\Food.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\Food\HealthyFood.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\Food\UnhealthyFood.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\HeaderFinish.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\MonsterController.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\MyRandom.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\NutritionFacts.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\PercentScores.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\Quiz.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\QuizController.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\SamController.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\SetFoodFields.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\SpeedChanger.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\SpeedListener.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\TFButton.cs" />
+    <Compile Include="Assets\Falling Food Minigame\Scripts\Track.cs" />
+    <Compile Include="Assets\FinishButton.cs" />
+    <Compile Include="Assets\FloatDown.cs" />
+    <Compile Include="Assets\LoadScene.cs" />
+    <Compile Include="Assets\NewBehaviourScript.cs" />
+    <Compile Include="Assets\NewBehaviourScript1.cs" />
+    <Compile Include="Assets\NoDestroy.cs" />
+    <Compile Include="Assets\NutritionFact.cs" />
+    <Compile Include="Assets\Overworld\GlobalScore.cs" />
+    <Compile Include="Assets\Overworld\ScoreSetter.cs" />
+    <Compile Include="Assets\Overworld\Scripts\DialogueScript.cs" />
+    <Compile Include="Assets\Overworld\Scripts\LoadOnClicks.cs" />
+    <Compile Include="Assets\Overworld\Scripts\OverviewStart.cs" />
+    <Compile Include="Assets\Timer.cs" />
+    <Compile Include="Assets\Toothbrush Minigame\Scripts\Draggable.cs" />
+    <Compile Include="Assets\Toothbrush Minigame\Scripts\Finished.cs" />
+    <Compile Include="Assets\Toothbrush Minigame\Scripts\Teeth.cs" />
+    <Compile Include="Assets\Toothbrush Minigame\TeethScore.cs" />
+    <Compile Include="Assets\Unity Tutorial Assets\RandomFalling.cs" />
+    <Compile Include="Assets\Unity Tutorial Assets\Scripts\Despawn.cs" />
+    <Compile Include="Assets\Unity Tutorial Assets\Scripts\FollowPlayer.cs" />
+    <Compile Include="Assets\Unity Tutorial Assets\Scripts\MyFirstScript.cs" />
+    <Compile Include="Assets\Unity Tutorial Assets\Scripts\Score.cs" />
+    <Compile Include="Assets\Unity Tutorial Assets\Scripts\Test.cs" />
+    <Compile Include="Assets\Unity Tutorial Assets\Scripts\scrollFloor.cs" />
+    <None Include="Assets\Falling Food Minigame\Animation.meta" />
+    <None Include="Assets\Falling Food Minigame\Animation\Enemy.anim" />
+    <None Include="Assets\Falling Food Minigame\Animation\Enemy.anim.meta" />
+    <None Include="Assets\Falling Food Minigame\Animation\help.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Animation\help2.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Animation\help2_0.controller" />
+    <None Include="Assets\Falling Food Minigame\Animation\help2_0.controller.meta" />
+    <None Include="Assets\Falling Food Minigame\Animation\help_0.controller" />
+    <None Include="Assets\Falling Food Minigame\Animation\help_0.controller.meta" />
+    <None Include="Assets\Falling Food Minigame\Animation\New Animation.anim" />
+    <None Include="Assets\Falling Food Minigame\Animation\New Animation.anim.meta" />
+    <None Include="Assets\Falling Food Minigame\Animation\New_Sam.anim" />
+    <None Include="Assets\Falling Food Minigame\Animation\New_Sam.anim.meta" />
+    <None Include="Assets\Falling Food Minigame\Animation\RunSamRun3.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Animation\RunSamRun3_0.controller" />
+    <None Include="Assets\Falling Food Minigame\Animation\RunSamRun3_0.controller.meta" />
+    <None Include="Assets\Falling Food Minigame\Animation\Sam.anim" />
+    <None Include="Assets\Falling Food Minigame\Animation\Sam.anim.meta" />
+    <None Include="Assets\Falling Food Minigame\Falling Food.unity" />
+    <None Include="Assets\Falling Food Minigame\Falling Food.unity.meta" />
+    <None Include="Assets\Falling Food Minigame\Music.meta" />
+    <None Include="Assets\Falling Food Minigame\Music\BETTERFOOD.mp3.meta" />
+    <None Include="Assets\Falling Food Minigame\Music\Check-Wrong.wav.meta" />
+    <None Include="Assets\Falling Food Minigame\Music\Food-Incompetech.mp3.meta" />
+    <None Include="Assets\Falling Food Minigame\Music\Good_Food_kianda.wav.meta" />
+    <None Include="Assets\Falling Food Minigame\Music\WrongFood-timgormly.aiff.meta" />
+    <None Include="Assets\Falling Food Minigame\Prefabs.meta" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\banana.prefab" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\banana.prefab.meta" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\broccoli.prefab" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\broccoli.prefab.meta" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\carrot.prefab" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\carrot.prefab.meta" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\hamburger.prefab" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\hamburger.prefab.meta" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\icecream.prefab" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\icecream.prefab.meta" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\pizza.prefab" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\pizza.prefab.meta" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\ScrollingTrack.prefab" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\ScrollingTrack.prefab.meta" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\Track Start.prefab" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\Track Start.prefab.meta" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\Track Texture %282%29.prefab" />
+    <None Include="Assets\Falling Food Minigame\Prefabs\Track Texture %282%29.prefab.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\banana.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\broccoli.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\carrot.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\Cheeseburger.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\Finish Line.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\hamburger.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\icecream.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\pizza.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\pizza.prefab" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\pizza.prefab.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\Track Start.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\Track Texture.png.meta" />
+    <None Include="Assets\Falling Food Minigame\Raw Art\track-lanes-24469463.jpg.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\BrandonController.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\FallingFoodController.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\Food.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\FoodScore.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\Food\Food.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\Food\HealthyFood.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\Food\UnhealthyFood.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\HeaderFinish.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\MonsterController.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\MyRandom.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\NutritionFacts.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\PercentScores.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\Quiz.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\QuizController.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\SamController.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\SetFoodFields.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\SpeedChanger.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\SpeedListener.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\TFButton.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Scripts\Track.cs.meta" />
+    <None Include="Assets\Falling Food Minigame\Track.mat" />
+    <None Include="Assets\Falling Food Minigame\Track.mat.meta" />
+    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
+    <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
+    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
+    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{296ADDB7-D02C-9CE2-E125-083CC975258F}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{296ADDB7-D02C-9CE2-E125-083CC975258F}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Falling Food Minigame\Animation\help.png" />
+    <Content Include="Assets\Falling Food Minigame\Animation\help2.png" />
+    <Content Include="Assets\Falling Food Minigame\Animation\RunSamRun3.png" />
+    <Content Include="Assets\Falling Food Minigame\Music\BETTERFOOD.mp3" />
+    <Content Include="Assets\Falling Food Minigame\Music\Check-Wrong.wav" />
+    <Content Include="Assets\Falling Food Minigame\Music\Food-Incompetech.mp3" />
+    <Content Include="Assets\Falling Food Minigame\Music\Good_Food_kianda.wav" />
+    <Content Include="Assets\Falling Food Minigame\Music\WrongFood-timgormly.aiff" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\banana.png" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\broccoli.png" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\carrot.png" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\Cheeseburger.png" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\Finish Line.png" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\hamburger.png" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\icecream.png" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\pizza.png" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\Track Start.png" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\Track Texture.png" />
+    <Content Include="Assets\Falling Food Minigame\Raw Art\track-lanes-24469463.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -119,5 +226,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>

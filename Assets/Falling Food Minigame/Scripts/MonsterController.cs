@@ -24,14 +24,14 @@ public class MonsterController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//CatchSam ();
-
-		if (!monsterFlag && samController.getSpeed() >= 25) {
-			brandonSpeed = 1;            
+/*
+		if (!monsterFlag && samController.getSpeed() >= 40) {
+			brandonSpeed = 31;            
 			monsterFlag = true;
 			SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
 			sr.enabled = true;
 		}
-		if (monsterFlag && !samCaughtFlag && samController.getSpeed() <= brandonSpeed/*samController.getSpeed () <= 30*/) {
+		if (monsterFlag && !samCaughtFlag && samController.getSpeed() <= brandonSpeed/*samController.getSpeed () <= 30) {
 			CatchSam ();
 			samCaughtFlag = true;
 		} 
@@ -39,9 +39,10 @@ public class MonsterController : MonoBehaviour {
 			CatchSam ();
 		if ((samController.getSpeed() % 5 <= 1) && samController.getSpeed() > tempSamSpeed) {
 			tempSamSpeed = samController.getSpeed ();
-			brandonSpeed += 1;
+			brandonSpeed += 5;
 		}
 
+       
 		/*
 		if (samController.getSpeed () >= 50 && speedStage == 0) {
 			brandonSpeed = 46;

@@ -88,7 +88,7 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger {
     //spawns a healthy (or unhealthy) portion of food above camera
     for (int i = 0; i < numFoodOnScreen; i++) {
 
-      //spawns food in space above camera
+      //spawns food in spfaace above camera
       spawnFood (Camera.main.orthographicSize * 2);
 
       //spawns food in 2x space above camera - ensures flow

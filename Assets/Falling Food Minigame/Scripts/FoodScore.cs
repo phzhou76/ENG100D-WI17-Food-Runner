@@ -28,7 +28,11 @@ public class FoodScore : MonoBehaviour
         UnhealthyFoodCount.text ="x" + unhealthyFood.ToString();
         HealthyFoodScore.text = healthyFood.ToString();
         UnhealthyFoodScore.text = "-" + unhealthyFood.ToString();
-        
+
+
+
+
+
         GlobalScore.addScore(healthyFood - unhealthyFood);
 
     }
