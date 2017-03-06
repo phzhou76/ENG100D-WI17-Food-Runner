@@ -16,9 +16,6 @@ public class BrandonController : MonoBehaviour {
     private float min = -1.24f;
     private System.Random random = new System.Random();
     private static Int64 counter = 0; 
-    
-   
-
 
     // Brandons Position
     Vector3 brandonPosition;
@@ -27,7 +24,7 @@ public class BrandonController : MonoBehaviour {
     {
         
         Vector3 newPosition = this.transform.position;
-
+        
         if (counter % 30 == 0)
         {
             float next = (float)random.NextDouble();
@@ -67,7 +64,6 @@ public class BrandonController : MonoBehaviour {
     /// <param name="other">Food that Sam collided with.</param>
     void OnTriggerEnter2D(Collider2D other)
     {
-
         //if the collision was indeed with a piece of food
         if (other.GetComponent<Food>())
         {
