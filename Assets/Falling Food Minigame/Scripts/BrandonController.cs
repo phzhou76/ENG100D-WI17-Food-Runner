@@ -23,6 +23,8 @@ public class BrandonController : MonoBehaviour {
     // Brandons Position
     Vector3 brandonPosition;
 
+
+
     void Update()
     {
         
@@ -38,11 +40,11 @@ public class BrandonController : MonoBehaviour {
             float ab = Math.Abs(change); 
             if ( ab > 0.8f)
             {
-                newPos /= 6.0f; 
+                newPos /= 4.0f; 
             }
-            else if(ab > 0.1f && ab < 0.8f)
+            else if(ab > 0.2f && ab < 0.8f)
             {
-                newPos /= 3.0f; 
+                newPos /= 2.0f; 
             }
 
             newPosition.x = newPos;
@@ -107,7 +109,7 @@ public class BrandonController : MonoBehaviour {
   
 
     /// <summary>
-    /// Returns amount of healthy food Brandon has grabbed
+    /// Returns amount of healthy food Sam has grabbed
     /// </summary>
     /// <returns>The healthy food number.</returns>
     public int getHealthyFood()
@@ -117,7 +119,7 @@ public class BrandonController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Returns amount of unhealthy food Brandon has grabbed
+    /// Returns amount of unhealthy food Sam has grabbed
     /// </summary>
     /// <returns>The unhealthy food number.</returns>
     public int getUnhealthyFood()
