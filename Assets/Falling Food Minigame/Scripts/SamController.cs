@@ -28,7 +28,7 @@ public class SamController : MonoBehaviour {
 
       //sets x position of new position to the mouse's x position in world
       newPosition.x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-      newPosition.y = Camera.main.ScreenToWorldPoint(Input.mousePosition).y; 
+   //   controller.setSamY(newPosition.y);  
 
       //sets Sam's x position to the mouse position
       this.transform.position = newPosition;
@@ -80,8 +80,24 @@ public class SamController : MonoBehaviour {
       healthyFood++;
       score++;
       controller.updateScrollSpeed(1);
-      controller.updateScore(score);
+    /*
+    controller.updateSamSpeed();
 
+    
+    print(controller.getBrandonSpeed());
+
+     
+      if((controller.getBrandonSpeed() < controller.getSamSpeed()) &&
+                    (controller.getBrandonYPos() == controller.getSamYPos()))
+      {
+          Vector3 newPosition = this.transform.position;
+          newPosition.y += 0.1f;
+          this.transform.position = newPosition;
+          samPosition = newPosition;
+      }
+
+      controller.updateScore(score);
+      */
     }
 
     //checks if food is unhealthy, and if so increments counter and decreases speed

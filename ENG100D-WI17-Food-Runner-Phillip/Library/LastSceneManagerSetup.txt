@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Falling Food Minigame/Falling Food.unity
+  isLoaded: 1
+  isActive: 1

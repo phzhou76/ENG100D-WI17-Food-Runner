@@ -9,14 +9,22 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger {
 
 
 	//coroutine flag
-	private bool continueFlow = false; 
+  private bool continueFlow = false; 
 
 
   public SamController sam;
 
   public MonsterController monster;
 
-	private HeaderFinish finishHeader;
+  private HeaderFinish finishHeader;
+
+
+    //AN ATTEMPT TO ADD SPEED ... REMOVE IF NOT WORKING
+    public int brandonSpeed = 25; 
+    public int samSpeed = 25;
+    public float brandonY = 0.0f;
+    public float samY = 0.0f; 
+
 
   //track prefab to spawn tracks from
   public Track regularTrackPrefab;
@@ -105,8 +113,49 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger {
     gameTimer = new Timer();
 
   }
+  
+  /*
+  public void updateSamSpeed()
+  {
+        samSpeed++; 
+  }
 
-  void Update () {
+  public int getSamSpeed()
+  {
+        return samSpeed; 
+  }
+
+    public float getSamYPos()
+    {
+         return samY;
+    }
+
+    public void setSamY(float y)
+    {
+         brandonY = y;
+    }
+
+    public void updateBrandonSpeed()
+  {
+        brandonSpeed++;
+  }
+
+  public int getBrandonSpeed()
+  {
+      return brandonSpeed;
+  }
+
+    public float getBrandonYPos()
+    {
+        return brandonY; 
+    }
+
+    public void setBrandonY(float y)
+    {
+        brandonY = y; 
+    }
+    */
+    void Update () {
    
     //updates race completion value
     updateCompletion ();

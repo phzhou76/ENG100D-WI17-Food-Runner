@@ -1,0 +1,21 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Falling Food Minigame/Scripts/FallingFoodController.cs">
+    <Files>
+      <File FileName="Assets/Falling Food Minigame/Scripts/FallingFoodController.cs" Line="201" Column="66" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/SamController.cs" Line="6" Column="28" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/Track.cs" Line="31" Column="40" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/MyRandom.cs" Line="1" Column="1" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/FoodScore.cs" Line="1" Column="1" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/SpeedListener.cs" Line="7" Column="12" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/SpeedChanger.cs" Line="16" Column="30" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/SetFoodFields.cs" Line="1" Column="1" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/MonsterController.cs" Line="42" Column="24" />
+      <File FileName="Assets/Falling Food Minigame/Scripts/PercentScores.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
