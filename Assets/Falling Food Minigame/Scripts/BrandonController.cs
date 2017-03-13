@@ -8,50 +8,55 @@ public class BrandonController : MonoBehaviour {
     //the game controller
     public FallingFoodController controller;
 
-    //counts of healthy and unhealthy food that Sam has collected
-    private int healthyFood, unhealthyFood;
+    /*counts of healthy and unhealthy food that Sam has collected
     private int score = 0;
     private static bool rand = false;
     private float max = 0.55f;
     private float min = -1.24f;
     private System.Random random = new System.Random();
-    private static Int64 counter = 0; 
+    */
 
     // Brandons Position
     Vector3 brandonPosition;
+    private int lane = 1;
+    private static Int64 counter = 0;
+    private int healthyFood, unhealthyFood;
 
     void Update()
     {
-        
-        Vector3 newPosition = this.transform.position;
-        
-        if (counter % 30 == 0)
-        {
-            float next = (float)random.NextDouble();
-            float range = max - min;
-            next = min + (next * range);
-            float newPos = next;
-            float change = brandonPosition.x - newPos;
-            float ab = Math.Abs(change); 
-            if ( ab > 0.8f)
-            {
-                newPos /= 6.0f; 
-            }
-            else if(ab > 0.1f && ab < 0.8f)
-            {
-                newPos /= 3.0f; 
-            }
 
-            newPosition.x = newPos;
-            this.transform.position = newPosition;
+    Vector3 newPosition = this.transform.position;
 
-            brandonPosition = newPosition;
+    if (counter % 30 == 0)
+    {
 
-            counter++;
-        }
-        else counter++; 
-      
+    int moveLane = UnityEngine.Random.Range(0, 3); 
+
+    switch (moveLane)
+    {
+         case 0:  //case to move left
+            if (lane == 0) break; 
+            newPosition.x += -0.5f;
+            lane--; 
+                break;
+         case 1:
+            if (lane == 2) break; 
+            newPosition.x += 0.5f;
+            lane++; 
+                break;
+         case 2:
+         default:
+                break;
     }
+
+
+    this.transform.position = newPosition;
+    counter++; 
+    }
+    else counter++;
+
+    }
+    
 
     public Vector3 getBrandonPosition()
     {
