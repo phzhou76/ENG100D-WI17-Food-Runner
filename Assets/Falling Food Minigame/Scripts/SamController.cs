@@ -92,11 +92,12 @@ public class SamController : MonoBehaviour
         //if the collision was indeed with a piece of food
         if (other.GetComponent<Food>())
         {
-
             //grab the food
             grabFood(other.GetComponent<Food>());
 
         }
+        else
+            Debug.Log("Collided with Brandon.");
     }
 
 
