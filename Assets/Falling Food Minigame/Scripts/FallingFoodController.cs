@@ -16,9 +16,7 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
     public SamController sam;
 
     public MonsterController monster;
-
-    private HeaderFinish finishHeader;
-
+    
     //track prefab to spawn tracks from
     public Track regularTrackPrefab;
 
@@ -162,28 +160,6 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
         //height and width of camera - used to determine where to spawn food
         float camHeight = Camera.main.orthographicSize;
         float camWidth = camHeight * Camera.main.aspect;
-#if FALSE
-        //gets a random location relative to camera boundaries
-        Vector3 randomLoc = MyRandom.Location2D(Camera.main.transform.position, camWidth, camHeight);
-
-        //sets y value of new location +offset above camera
-        randomLoc.y += camOffset;
-
-        //changes depth of new location to ensure spawned food will be visible and above track
-        randomLoc.z = Camera.main.transform.position.z + trackOffsetFromCamera - 1;
-
-        //gets a random food from the food prefabs
-        Food randomFood = foodPrefabs[MyRandom.Index(foodPrefabs.Length)];
-
-        //instantiates a random food
-        Food newFood = (Food)GameObject.Instantiate(randomFood, randomLoc, new Quaternion());
-
-        //initializes food values
-        newFood.Initialize(scrollSpeed, this);
-
-        //registers the new food as a speed listener, will get scroll speed updates
-        registerSpeedListener(newFood);
-#endif
         // Instantiate the food in one of three lanes.
         int spawnLane = Random.Range(0, 3);
 
@@ -379,7 +355,6 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
     public void updateScore(int score)
     {
         scoreTracker.displayScore(score);
-
     }
 
     IEnumerator Process()

@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System; 
+using System;
 
-public class BrandonController : MonoBehaviour {
+public class BrandonController : MonoBehaviour
+{
 
     //the game controller
     public FallingFoodController controller;
@@ -25,38 +26,38 @@ public class BrandonController : MonoBehaviour {
     void Update()
     {
 
-    Vector3 newPosition = this.transform.position;
+        Vector3 newPosition = this.transform.position;
 
-    if (counter % 30 == 0)
-    {
+        if (counter % 30 == 0)
+        {
 
-    int moveLane = UnityEngine.Random.Range(0, 3); 
+            int moveLane = UnityEngine.Random.Range(0, 3);
 
-    switch (moveLane)
-    {
-         case 0:  //case to move left
-            if (lane == 0) break; 
-            newPosition.x += -0.5f;
-            lane--; 
-                break;
-         case 1:
-            if (lane == 2) break; 
-            newPosition.x += 0.5f;
-            lane++; 
-                break;
-         case 2:
-         default:
-                break;
+            switch (moveLane)
+            {
+                case 0:  //case to move left
+                    if (lane == 0) break;
+                    newPosition.x += -0.5f;
+                    lane--;
+                    break;
+                case 1:
+                    if (lane == 2) break;
+                    newPosition.x += 0.5f;
+                    lane++;
+                    break;
+                case 2:
+                default:
+                    break;
+            }
+
+
+            this.transform.position = newPosition;
+            counter++;
+        }
+        else counter++;
+        Debug.Log("Brandon's position: " + this.transform.position);
     }
 
-
-    this.transform.position = newPosition;
-    counter++; 
-    }
-    else counter++;
-
-    }
-    
 
     public Vector3 getBrandonPosition()
     {
@@ -105,7 +106,7 @@ public class BrandonController : MonoBehaviour {
 
     }
 
-  
+
 
     /// <summary>
     /// Returns amount of healthy food Brandon has grabbed

@@ -65,7 +65,14 @@ public class PercentScores : MonoBehaviour, SpeedListener
     /// <param name="percent">Percent.</param>
     public void displayRaceCompletion(float percent)
     {
-        raceCompletedBar.localScale = new Vector3(percent * 0.01f, raceCompletedBar.localScale.y, raceCompletedBar.localScale.z);
+        if(percent < 100.0f)
+        {
+            raceCompletedBar.localScale = new Vector3(percent * 0.01f, raceCompletedBar.localScale.y, raceCompletedBar.localScale.z);
+        }
+        else
+        {
+            raceCompletedBar.localScale = new Vector3(1.0f, raceCompletedBar.localScale.y, raceCompletedBar.localScale.z);
+        }
         //displays the new race completion text when race completion
         raceCompletedText.text = raceCompletedString + (int)percent + percentString;
     }

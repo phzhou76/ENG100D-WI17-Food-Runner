@@ -13,16 +13,23 @@ public class SamController : MonoBehaviour
 
     //counts of healthy and unhealthy food that Sam has collected
     private int healthyFood, unhealthyFood;
-    private int score = 0;
 
     // The current lane that Sam is on. Default is middle lane.
     private int lane = 1;
 
+    // Reference to the animation.
+    Animator charAnim;
+
+    void Start()
+    {
+        charAnim = this.GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        // Obtain vertical key input.
         float vertSpeed = Input.GetAxisRaw("Vertical") * Time.deltaTime;
-
         Vector3 position = this.transform.position;
 
         if (vertSpeed != 0.0f)
@@ -45,9 +52,8 @@ public class SamController : MonoBehaviour
         }
 
         this.transform.position = position;
-
         // Time slow effect.
-        if(Input.GetButtonDown("Time Stop"))
+        if (Input.GetButtonDown("Time Stop"))
         {
             Time.timeScale = 0.3f;
         }
@@ -56,25 +62,13 @@ public class SamController : MonoBehaviour
         {
             Time.timeScale = 1.0f;
         }
-
-#if FALSE
-        //checks if mouse is being pressed
-        if (Input.GetMouseButton(0))
+        
+        // Based the character's speed, adjust the animation speed to match it.
+        if(charAnim != null)
         {
-
-            //sets an initial position to Sam's current location
-            Vector3 newPosition = this.transform.position;
-
-            //sets x position of new position to the mouse's x position in world
-            newPosition.x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-            newPosition.y = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
-
-            //sets Sam's x position to the mouse position
-            this.transform.position = newPosition;
-            samPosition = newPosition;
-
+            // Create a lerp to match speed with animation speed proportionally.
+            charAnim.speed = Mathf.Lerp(0.7f, 2.5f, (getSpeed() / 100.0f));
         }
-#endif
     }
 
     public Vector3 getSamPosition()
@@ -87,17 +81,10 @@ public class SamController : MonoBehaviour
     /// </summary>
     /// <param name="other">Food that Sam collided with.</param>
     void OnTriggerEnter2D(Collider2D other)
-    {
-
+    { 
         //if the collision was indeed with a piece of food
         if (other.GetComponent<Food>())
-        {
-            //grab the food
             grabFood(other.GetComponent<Food>());
-
-        }
-        else
-            Debug.Log("Collided with Brandon.");
     }
 
 
@@ -122,28 +109,18 @@ public class SamController : MonoBehaviour
         //checks if food is healthy, and if so, increments counter and increases speed
         if (food.isHealthy())
         {
-
             healthyFood++;
-            score++;
             controller.updateScrollSpeed(1);
-            controller.updateScore(score);
-
         }
 
         //checks if food is unhealthy, and if so increments counter and decreases speed
         else
         {
-
             unhealthyFood++;
-            if (score > 0)
-            {
-                score--;
-            }
-            controller.updateScore(score);
             controller.updateScrollSpeed(-1);
-
         }
 
+        controller.updateScore(healthyFood);
         //removes the food from existence
         food.remove();
 
