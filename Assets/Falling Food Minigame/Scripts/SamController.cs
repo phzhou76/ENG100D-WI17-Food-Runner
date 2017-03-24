@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -20,38 +21,128 @@ public class SamController : MonoBehaviour
     // Reference to the animation.
     Animator charAnim;
 
+    // Reference to the healthy and unhealthy food texts.
+    public Text healthyText;
+    public Text unhealthyText;
+
+    private bool isJumping = false;
+    private float distanceTraveled = 0.0f;
+    private float jumpSpeed = 1.0f;
+    private bool jumpDirection = false; // false if going left, true if going right.
+
+    private Vector3 leftLanePos;
+    private Vector3 middleLanePos;
+    private Vector3 rightLanePos;
+    
     void Start()
     {
         charAnim = this.GetComponent<Animator>();
+        leftLanePos = this.transform.position - new Vector3(0.5f, 0.0f, 0.0f);
+        middleLanePos = this.transform.position;
+        rightLanePos = this.transform.position + new Vector3(0.5f, 0.0f, 0.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Obtain vertical key input.
-        float vertSpeed = Input.GetAxisRaw("Vertical") * Time.deltaTime;
-        Vector3 position = this.transform.position;
+        float vertSpeed = Input.GetAxisRaw("Vertical");
 
         if (vertSpeed != 0.0f)
         {
-            position.y += vertSpeed;
+            Vector3 position = this.transform.position;
+            position.y += vertSpeed * Time.deltaTime;
+            if (position.y < 0.15f)
+                position.y = 0.15f;
+            if (position.y > 0.50f)
+                position.y = 0.50f;
+            this.transform.position = position;
         }
-
-        if (Input.GetButtonDown("Horizontal"))
+        else
         {
-            if (Input.GetAxisRaw("Horizontal") < 0 && lane > 0)
-            {
-                --lane;
-                position.x -= 0.5f;
-            }
-            else if (Input.GetAxisRaw("Horizontal") > 0 && lane < 2)
-            {
-                ++lane;
-                position.x += 0.5f;
-            }
+            Vector3 position = this.transform.position;
+            position.y -= 0.01f;
+            if (position.y < 0.15f)
+                position.y = 0.15f;
+            if (position.y > 0.50f)
+                position.y = 0.50f;
+            this.transform.position = position;
         }
 
-        this.transform.position = position;
+        if (lane == 0)
+        {
+            if(isJumping)
+            {
+                // Vector3 position = leftLanePos;
+                // position.x = Mathf.Lerp(leftLanePos.x, middleLanePos.x, jumpSpeed * Time.deltaTime);
+                Vector3 position = this.transform.position;
+                position.x += 0.10f;
+                this.transform.position = position;
+                if (Mathf.Approximately(this.transform.position.x, middleLanePos.x))
+                {
+                    ++lane;
+                    isJumping = false;
+                }
+            }
+            else if(Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") > 0)
+            {
+                isJumping = true;
+                charAnim.speed = 0.1f;
+            }
+        }
+        else if(lane == 1)
+        {
+            if (isJumping)
+            {
+                // Vector3 position = middleLanePos;
+                // position.x = Mathf.Lerp(middleLanePos.x, (jumpDirection ? leftLanePos.x : rightLanePos.x), jumpSpeed * Time.deltaTime);
+                Vector3 position = this.transform.position;
+                position.x += (jumpDirection ? 0.10f : -0.10f);
+                this.transform.position = position;
+                if (Mathf.Approximately(this.transform.position.x, (jumpDirection ? rightLanePos.x : leftLanePos.x)))
+                {
+                    if (jumpDirection)
+                        ++lane;
+                    else
+                        --lane;
+                    isJumping = false;
+                }
+            }
+            else if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") < 0)
+            {
+                isJumping = true;
+                jumpDirection = false;
+                charAnim.speed = 0.1f;
+            }
+            else if(Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") > 0)
+            {
+                isJumping = true;
+                jumpDirection = true;
+                charAnim.speed = 0.1f;
+            }
+        }
+        else if(lane == 2)
+        {
+            if (isJumping)
+            {
+                // Vector3 position = rightLanePos;
+                // position.x = Mathf.Lerp(rightLanePos.x, middleLanePos.x, jumpSpeed * Time.deltaTime);
+                Vector3 position = this.transform.position;
+                position.x += -0.10f;
+                this.transform.position = position;
+                if (Mathf.Approximately(this.transform.position.x, middleLanePos.x))
+                {
+                    isJumping = false;
+                    --lane;
+                }
+            }
+            else if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") < 0)
+            {
+                isJumping = true;
+                charAnim.speed = 0.1f;
+            }
+        }
+        
         // Time slow effect.
         if (Input.GetButtonDown("Time Stop"))
         {
@@ -64,7 +155,7 @@ public class SamController : MonoBehaviour
         }
         
         // Based the character's speed, adjust the animation speed to match it.
-        if(charAnim != null)
+        if(charAnim != null && !isJumping)
         {
             // Create a lerp to match speed with animation speed proportionally.
             charAnim.speed = Mathf.Lerp(0.7f, 2.5f, (getSpeed() / 100.0f));
@@ -111,6 +202,7 @@ public class SamController : MonoBehaviour
         {
             healthyFood++;
             controller.updateScrollSpeed(1);
+            healthyText.text = healthyFood.ToString();
         }
 
         //checks if food is unhealthy, and if so increments counter and decreases speed
@@ -118,6 +210,7 @@ public class SamController : MonoBehaviour
         {
             unhealthyFood++;
             controller.updateScrollSpeed(-1);
+            unhealthyText.text = unhealthyFood.ToString();
         }
 
         controller.updateScore(healthyFood);
@@ -137,7 +230,6 @@ public class SamController : MonoBehaviour
     /// <returns>The healthy food number.</returns>
     public int getHealthyFood()
     {
-
         return healthyFood;
     }
 
@@ -147,8 +239,6 @@ public class SamController : MonoBehaviour
     /// <returns>The unhealthy food number.</returns>
     public int getUnhealthyFood()
     {
-
         return unhealthyFood;
-
     }
 }

@@ -72,6 +72,8 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
 
     public static bool samFinish = false;
 
+    private float cameraSize;   // Size of camera in orthographic view.
+
     // Use this for initialization
     void Start()
     {
@@ -86,16 +88,16 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
         scrollingTracks = spawnTracks();
 
         //spawns a healthy (or unhealthy) portion of food above camera
-        for (int i = 0; i < numFoodOnScreen; i++)
-        {
+        // for (int i = 0; i < numFoodOnScreen; i++)
+        // {
 
             //spawns food in spfaace above camera
-            spawnFood(Camera.main.orthographicSize * 2);
+            // spawnFood(Camera.main.orthographicSize * 2);
 
             //spawns food in 2x space above camera - ensures flow
-            spawnFood(Camera.main.orthographicSize * 4);
+            // spawnFood(Camera.main.orthographicSize * 4);
 
-        }
+        // }
 
         //initializes the score tracker with correct speeds
         scoreTracker.Initialize(minSpeed, maxSpeed, scrollSpeed);
@@ -105,14 +107,16 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
 
         gameTimer = new Timer();
 
+        cameraSize = Camera.main.orthographicSize * 2;
     }
 
     void Update()
     {
-
         //updates race completion value
         updateCompletion();
 
+        // Spawns food every couple of seconds.
+        
     }
 
     /// <summary>
@@ -151,6 +155,38 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
 
     }
 
+    IEnumerator SpawnFood()
+    {
+        // Determine the location of where to spawn food.
+        float cameraHeight = Camera.main.orthographicSize;
+        float cameraWidth = cameraHeight * Camera.main.aspect;
+
+        // Pick one of three lanes to spawn food.
+        int spawnLane = Random.Range(0, 3);
+
+        // Grab a random location relative to camera boundaries, then overwrite the x-axis value.
+        Vector3 randomLocation = MyRandom.Location2D(Camera.main.transform.position, cameraWidth, cameraHeight);
+        switch(spawnLane)
+        {
+            case 0:
+                randomLocation.x = 0.84f;
+                break;
+            case 1:
+                randomLocation.x = -0.34f;
+                break;
+            case 2:
+            default:
+                randomLocation.x = 0.16f;
+                break;
+        }
+
+        // Add camera offset to food location to move it out of camera view.
+        randomLocation.y += cameraSize;
+
+
+        yield return null;
+    }
+
     /// <summary>
     /// Spawns food randomly in space directly above camera
     /// </summary>
@@ -187,7 +223,7 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
 
         // Gets a random food from the food prefabs
         Food randomFood = foodPrefabs[MyRandom.Index(foodPrefabs.Length)];
-
+        
         // Instantiates a random food
         Food newFood = (Food)GameObject.Instantiate(randomFood, randomLocation, new Quaternion());
 
@@ -349,7 +385,7 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
         GameObject.Destroy(food.gameObject);
 
         //spawns a new piece of food
-        spawnFood(Camera.main.orthographicSize * 2);
+        // spawnFood(Camera.main.orthographicSize * 2);
 
     }
     public void updateScore(int score)

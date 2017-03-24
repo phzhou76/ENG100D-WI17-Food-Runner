@@ -4,9 +4,7 @@ using UnityEngine.UI;
 
 public class PercentScores : MonoBehaviour, SpeedListener
 {
-    public Text raceCompletedText;
     public Text currentSpeedText;
-    public Text scoreText;
 
     public RectTransform raceCompletedBar;
 
@@ -43,7 +41,6 @@ public class PercentScores : MonoBehaviour, SpeedListener
 
         //displays the speed percent
         displaySpeedPercent(calculatePercent(minSpeed, maxSpeed, startSpeed));
-        scoreText.text = "Score: 0";
 
     }
 
@@ -73,8 +70,6 @@ public class PercentScores : MonoBehaviour, SpeedListener
         {
             raceCompletedBar.localScale = new Vector3(1.0f, raceCompletedBar.localScale.y, raceCompletedBar.localScale.z);
         }
-        //displays the new race completion text when race completion
-        raceCompletedText.text = raceCompletedString + (int)percent + percentString;
     }
 
     /// <summary>
@@ -101,6 +96,5 @@ public class PercentScores : MonoBehaviour, SpeedListener
 
     public void displayScore(int score)
     {
-        scoreText.text = "Score: " + (int)score + "";
     }
 }

@@ -55,7 +55,6 @@ public class BrandonController : MonoBehaviour
             counter++;
         }
         else counter++;
-        Debug.Log("Brandon's position: " + this.transform.position);
     }
 
 
