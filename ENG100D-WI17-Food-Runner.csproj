@@ -118,6 +118,7 @@
     <Compile Include="Assets\Overworld\Scripts\DialogueScript.cs" />
     <Compile Include="Assets\Overworld\Scripts\LoadOnClicks.cs" />
     <Compile Include="Assets\Overworld\Scripts\OverviewStart.cs" />
+    <Compile Include="Assets\Scrpit.cs" />
     <Compile Include="Assets\Timer.cs" />
     <Compile Include="Assets\Toothbrush Minigame\Scripts\Draggable.cs" />
     <Compile Include="Assets\Toothbrush Minigame\Scripts\Finished.cs" />

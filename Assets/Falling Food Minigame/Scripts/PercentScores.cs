@@ -8,6 +8,8 @@ public class PercentScores : MonoBehaviour, SpeedListener
     public Text currentSpeedText;
     public Text scoreText;
 
+    public Image faceImage;
+
     public RectTransform raceCompletedBar;
 
     float minSpeed, maxSpeed;
@@ -65,7 +67,7 @@ public class PercentScores : MonoBehaviour, SpeedListener
     /// <param name="percent">Percent.</param>
     public void displayRaceCompletion(float percent)
     {
-        if(percent < 100.0f)
+        if (percent < 100.0f)
         {
             raceCompletedBar.localScale = new Vector3(percent * 0.01f, raceCompletedBar.localScale.y, raceCompletedBar.localScale.z);
         }
@@ -101,6 +103,22 @@ public class PercentScores : MonoBehaviour, SpeedListener
 
     public void displayScore(int score)
     {
+        setImage(score);
         scoreText.text = "Score: " + (int)score + "";
     }
+
+    public void setImage(int i)
+    {
+        if (!(faceImage.sprite = Resources.Load<Sprite>("Neutral")))
+            Debug.Log("I have no Image, fix me!!");
+
+
+        if (i < 5) faceImage.sprite = Resources.Load<Sprite>("Mad Face");
+        else if (i >= 5 && i < 13) faceImage.sprite = Resources.Load<Sprite>("Sad Face");
+        else if (i >= 13 && i < 21) faceImage.sprite = Resources.Load<Sprite>("Neutral");
+        else if (i >= 21 && i < 30) faceImage.sprite = Resources.Load<Sprite>("Happy Face");
+        else if (i >= 30) faceImage.sprite = Resources.Load<Sprite>("Estatic");
+
+    }
+
 }
