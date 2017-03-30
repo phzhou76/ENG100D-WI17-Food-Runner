@@ -23,9 +23,48 @@ public class BrandonController : MonoBehaviour
     private static Int64 counter = 0;
     private int healthyFood, unhealthyFood;
 
+    private void Start()
+    {
+        StartCoroutine(ScanFoods());
+    }
+
+    IEnumerator ScanFoods()
+    {
+        while(!FallingFoodController.samFinish)
+        {
+            int healthyLane1, healthyLane2, healthyLane3;
+            healthyLane1 = healthyLane2 = healthyLane3 = 0;
+            Food[] foods = FindObjectsOfType(typeof(Food)) as Food[];
+            foreach (Food currFood in foods)
+            {
+                if (currFood.isHealthy())
+                {
+                    if (currFood.transform.position.x == -0.84f)
+                        ++healthyLane1;
+                    else if (currFood.transform.position.x == -0.34f)
+                        ++healthyLane2;
+                    else if (currFood.transform.position.x == 0.16f)
+                        ++healthyLane3;
+                }
+            }
+
+            // Move Brandon to the lane with the greatest number of healthy foods.
+            if (healthyLane1 >= healthyLane2 && healthyLane1 >= healthyLane3)
+                this.transform.position = new Vector3(-0.83f, transform.position.y, transform.position.z);
+            else if (healthyLane2 >= healthyLane1 && healthyLane2 >= healthyLane3)
+                this.transform.position = new Vector3(-0.34f, transform.position.y, transform.position.z);
+            else if (healthyLane3 >= healthyLane1 && healthyLane3 >= healthyLane1)
+                this.transform.position = new Vector3(0.16f, transform.position.y, transform.position.z);
+
+            yield return new WaitForSeconds(2.0f);
+        }            
+
+        yield return null;
+    }
+
     void Update()
     {
-
+#if FALSE
         Vector3 newPosition = this.transform.position;
 
         if (counter % 30 == 0)
@@ -55,6 +94,7 @@ public class BrandonController : MonoBehaviour
             counter++;
         }
         else counter++;
+#endif
     }
 
 
@@ -72,7 +112,6 @@ public class BrandonController : MonoBehaviour
         //if the collision was indeed with a piece of food
         if (other.GetComponent<Food>())
         {
-
             //grab the food
             grabFood(other.GetComponent<Food>());
 
@@ -81,7 +120,7 @@ public class BrandonController : MonoBehaviour
 
     private void grabFood(Food food)
     {
-        /*
+#if FALSE
         Vector3 newPosition = this.transform.position;
         if (food.isHealthy())
         {
@@ -99,8 +138,8 @@ public class BrandonController : MonoBehaviour
             brandonPosition = newPosition;
 
         }
+#endif
         //removes the food from existence
-        */
         food.remove();
 
     }
@@ -123,9 +162,7 @@ public class BrandonController : MonoBehaviour
     /// <returns>The unhealthy food number.</returns>
     public int getUnhealthyFood()
     {
-
         return unhealthyFood;
-
     }
 
 

@@ -7,12 +7,9 @@ using System.Collections.Generic;
 /// </summary>
 public class FallingFoodController : MonoBehaviour, SpeedChanger
 {
-
-
     //coroutine flag
     private bool continueFlow = false;
-
-
+    
     public SamController sam;
 
     public MonsterController monster;
@@ -86,19 +83,7 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
 
         //spawns two tracks that will be used throughout the game
         scrollingTracks = spawnTracks();
-
-        //spawns a healthy (or unhealthy) portion of food above camera
-        // for (int i = 0; i < numFoodOnScreen; i++)
-        // {
-
-            //spawns food in spfaace above camera
-            // spawnFood(Camera.main.orthographicSize * 2);
-
-            //spawns food in 2x space above camera - ensures flow
-            // spawnFood(Camera.main.orthographicSize * 4);
-
-        // }
-
+        
         //initializes the score tracker with correct speeds
         scoreTracker.Initialize(minSpeed, maxSpeed, scrollSpeed);
 
@@ -108,15 +93,15 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
         gameTimer = new Timer();
 
         cameraSize = Camera.main.orthographicSize * 2;
+
+        // Start coroutine for spawning food.
+        StartCoroutine(SpawnFood());
     }
 
     void Update()
     {
         //updates race completion value
         updateCompletion();
-
-        // Spawns food every couple of seconds.
-        
     }
 
     /// <summary>
@@ -161,77 +146,89 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
         float cameraHeight = Camera.main.orthographicSize;
         float cameraWidth = cameraHeight * Camera.main.aspect;
 
-        // Pick one of three lanes to spawn food.
-        int spawnLane = Random.Range(0, 3);
-
-        // Grab a random location relative to camera boundaries, then overwrite the x-axis value.
-        Vector3 randomLocation = MyRandom.Location2D(Camera.main.transform.position, cameraWidth, cameraHeight);
-        switch(spawnLane)
+        while (!samFinish)
         {
-            case 0:
-                randomLocation.x = 0.84f;
-                break;
-            case 1:
-                randomLocation.x = -0.34f;
-                break;
-            case 2:
-            default:
-                randomLocation.x = 0.16f;
-                break;
+            // Pick one of three lanes to spawn food.
+            int spawnLane = Random.Range(0, 3);
+
+            /* Three types of spawn options: All healthy food, all unhealthy food, or a mix of both. */
+            int spawnType = Random.Range(0, 3);
+
+            // Determine how many foods to spawn for this iteration.
+            int spawnAmt = Random.Range(1, 4);
+
+            // Grab a random location relative to camera boundaries, then overwrite the x-axis value.
+            Vector3 randomLocation = MyRandom.Location2D(Camera.main.transform.position, cameraWidth, cameraHeight);
+
+            switch (spawnLane)
+            {
+                case 0:
+                    randomLocation.x = -0.84f;
+                    break;
+                case 1:
+                    randomLocation.x = -0.34f;
+                    break;
+                case 2:
+                default:
+                    randomLocation.x = 0.16f;
+                    break;
+            }
+
+            // Add camera offset to food location to move it out of camera view.
+            randomLocation.y += cameraSize;
+
+            // Change depth of new location to ensure spawned food will be visible and above track.
+            randomLocation.z = Camera.main.transform.position.z + trackOffsetFromCamera - 1;
+
+            if(spawnType == 0)
+            {
+                // Spawn all healthy food.
+                for(int i = 0; i < spawnAmt; ++i)
+                {
+                    // Get a random healthy food.
+                    Food randomFood = foodPrefabs[Random.Range(0, 3)];
+
+                    // Instantiate that food.
+                    Food newFood = (Food)GameObject.Instantiate(randomFood, new Vector3(randomLocation.x,
+                        randomLocation.y + 0.15f * i, randomLocation.z), new Quaternion());
+                    newFood.Initialize(scrollSpeed, this);
+                    registerSpeedListener(newFood);
+                }
+            }
+            else if(spawnType == 1)
+            {
+                // Spawn all unhealthy food.
+                for (int i = 0; i < spawnAmt; ++i)
+                {
+                    // Get a random healthy food.
+                    Food randomFood = foodPrefabs[Random.Range(3, 6)];
+
+                    // Instantiate that food.
+                    Food newFood = (Food)GameObject.Instantiate(randomFood, new Vector3(randomLocation.x,
+                        randomLocation.y + 0.15f * i, randomLocation.z), new Quaternion());
+                    newFood.Initialize(scrollSpeed, this);
+                    registerSpeedListener(newFood);
+                }
+            }
+            else if(spawnType == 2)
+            {
+                // Spawn a mix of healthy and unhealthy food.
+                for (int i = 0; i < spawnAmt; ++i)
+                {
+                    // Get a random healthy food.
+                    Food randomFood = foodPrefabs[Random.Range(0, 6)];
+
+                    // Instantiate that food.
+                    Food newFood = (Food)GameObject.Instantiate(randomFood, new Vector3(randomLocation.x,
+                        randomLocation.y + 0.15f * i, randomLocation.z), new Quaternion());
+                    newFood.Initialize(scrollSpeed, this);
+                    registerSpeedListener(newFood);
+                }
+            }
+            
+            yield return new WaitForSeconds(0.7f);
         }
-
-        // Add camera offset to food location to move it out of camera view.
-        randomLocation.y += cameraSize;
-
-
         yield return null;
-    }
-
-    /// <summary>
-    /// Spawns food randomly in space directly above camera
-    /// </summary>
-    /// <param name="camOffset">How far above camera to spawn food.</param>
-    private void spawnFood(float camOffset)
-    {
-        //height and width of camera - used to determine where to spawn food
-        float camHeight = Camera.main.orthographicSize;
-        float camWidth = camHeight * Camera.main.aspect;
-        // Instantiate the food in one of three lanes.
-        int spawnLane = Random.Range(0, 3);
-
-        // Grab a random location relative to camera boundaries, then overwrite the x axis value.
-        Vector3 randomLocation = MyRandom.Location2D(Camera.main.transform.position, camWidth, camHeight);
-        switch(spawnLane)
-        {
-            case 0:
-                randomLocation.x = -0.8f;
-                break;
-            case 1:
-                randomLocation.x = -0.3f;
-                break;
-            case 2:
-            default:
-                randomLocation.x = 0.2f;
-                break;
-        }
-
-        // Add an offset to the spawn location to spawn food above and out of camera view.
-        randomLocation.y += camOffset;
-
-        // Changes depth of new location to ensure spawned food will be visible and above track.
-        randomLocation.z = Camera.main.transform.position.z + trackOffsetFromCamera - 1;
-
-        // Gets a random food from the food prefabs
-        Food randomFood = foodPrefabs[MyRandom.Index(foodPrefabs.Length)];
-        
-        // Instantiates a random food
-        Food newFood = (Food)GameObject.Instantiate(randomFood, randomLocation, new Quaternion());
-
-        // Initializes food values
-        newFood.Initialize(scrollSpeed, this);
-
-        // Registers the new food as a speed listener, will get scroll speed updates
-        registerSpeedListener(newFood);
     }
 
     /// <summary>
@@ -239,7 +236,6 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
     /// </summary>
     private void updateCompletion()
     {
-
         //current rate of track completion as a numerical value, based on current speed
         float rateOfCompletion = (100 / startSpeedPercent) * ((scrollSpeed - minSpeed) / (maxSpeed - minSpeed));
 
@@ -281,7 +277,6 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
     /// <param name="speedListenerObject">Speed listener object.</param>
     public void registerSpeedListener(SpeedListener speedListenerObject)
     {
-
         //registers the speedListenerObject as a speedListener to get updates
         speedListeners.Add(speedListenerObject);
 
@@ -293,10 +288,8 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
     /// <param name="speedListenerObject">Speed listener object.</param>
     public void removeSpeedListener(SpeedListener speedListenerObject)
     {
-
         //removes the speedListenerObject from the speedListener list
         speedListeners.Remove(speedListenerObject);
-
     }
 
     /// <summary>
@@ -304,7 +297,6 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
     /// </summary>
     public void updateSpeedListener()
     {
-
         //updates all speedListeners with the new and correct speed
         foreach (SpeedListener speedListenerObject in speedListeners)
         {
@@ -322,7 +314,6 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
     /// </param>
     public void updateScrollSpeed(int change)
     {
-
         //initially calculates current speed as a percent
         float newPercentSpeed = 100 * ((this.scrollSpeed - minSpeed) / (maxSpeed - minSpeed));
 
@@ -335,7 +326,6 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
         //if the new calculated speed is within max/min bounds
         if (newSpeed >= minSpeed && newSpeed <= maxSpeed)
         {
-
             //update scroll speed in this class
             this.scrollSpeed = newSpeed;
 
@@ -346,19 +336,15 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
         //if speed change is too high
         else if (newSpeed >= maxSpeed)
         {
-
             //display a speed percent of 100 by default, exceeded max
             scoreTracker.displaySpeedPercent(100);
-
         }
 
         //if speed change is too low
         else if (newSpeed <= minSpeed)
         {
-
             //display a speed percent of 1 by default, exceeded min
             scoreTracker.displaySpeedPercent(1);
-
         }
 
         //updates Sam's speed
@@ -378,15 +364,11 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
     public void removeFood(Food food)
     {
 
-        //removes this food from the list of speedListeners
+        // Removes this food from the list of speedListeners
         speedListeners.Remove(food);
 
-        //destroys the food gameObject
+        // Destroys the food gameObject
         GameObject.Destroy(food.gameObject);
-
-        //spawns a new piece of food
-        // spawnFood(Camera.main.orthographicSize * 2);
-
     }
     public void updateScore(int score)
     {
@@ -395,11 +377,9 @@ public class FallingFoodController : MonoBehaviour, SpeedChanger
 
     IEnumerator Process()
     {
-
         //Wait 1 second
         yield return StartCoroutine(Wait(5.0f));
         continueFlow = true;
-        //Do process stuff
     }
 
     IEnumerator Wait(float seconds)

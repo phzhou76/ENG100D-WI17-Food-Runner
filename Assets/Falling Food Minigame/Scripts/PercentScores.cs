@@ -8,11 +8,15 @@ public class PercentScores : MonoBehaviour, SpeedListener
 
     public RectTransform raceCompletedBar;
 
+    public Image emotionImage;
+
     float minSpeed, maxSpeed;
 
     string raceCompletedString = "Race Completed: ";
     string currentSpeedString = "Current Speed: ";
     string percentString = "%";
+
+    private float maxSpeedDiv;  // For optimization.
 
     // Use this for initialization
     void Start()
@@ -38,6 +42,7 @@ public class PercentScores : MonoBehaviour, SpeedListener
         //sets min and max speeds for calculating speed percent
         this.minSpeed = minSpeed;
         this.maxSpeed = maxSpeed;
+        maxSpeedDiv = 1.0f / maxSpeed;
 
         //displays the speed percent
         displaySpeedPercent(calculatePercent(minSpeed, maxSpeed, startSpeed));
@@ -54,6 +59,19 @@ public class PercentScores : MonoBehaviour, SpeedListener
         //displays new speed percent when speed is updated
         displaySpeedPercent(calculatePercent(minSpeed, maxSpeed, speed));
 
+        // Determine the percentage of max speed.
+        float speedPercent = speed * maxSpeedDiv;
+
+        if (speedPercent >= 0.25f && speedPercent < 0.35f)
+            emotionImage.sprite = Resources.Load<Sprite>("Mad Face");
+        else if (speedPercent >= 0.35f && speedPercent < 0.40f)
+            emotionImage.sprite = Resources.Load<Sprite>("Sad Face");
+        else if (speedPercent >= 0.40f && speedPercent < 0.50f)
+            emotionImage.sprite = Resources.Load<Sprite>("Neutral");
+        else if (speedPercent >= 0.50f && speedPercent < 0.70f)
+            emotionImage.sprite = Resources.Load<Sprite>("Happy Face");
+        else if (speedPercent >= 0.70f)
+            emotionImage.sprite = Resources.Load<Sprite>("Estatic");
     }
 
     /// <summary>
@@ -78,7 +96,7 @@ public class PercentScores : MonoBehaviour, SpeedListener
     /// <param name="percent">Percent.</param>
     public void displaySpeedPercent(float percent)
     {
-        currentSpeedText.text = currentSpeedString + (int)percent + percentString;
+        
     }
 
     /// <summary>

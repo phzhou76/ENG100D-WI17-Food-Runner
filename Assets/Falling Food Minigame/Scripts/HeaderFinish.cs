@@ -15,7 +15,7 @@ public class HeaderFinish : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (MonsterController.samCaughtFlag && !isDisplayed) {
+        if (MonsterController.samCaughtFlag && !isDisplayed) {
 			textMesh.text = "Brandon Wins";
 			isDisplayed = true;
 			StartCoroutine (Process ());

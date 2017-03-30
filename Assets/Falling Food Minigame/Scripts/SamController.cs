@@ -25,6 +25,8 @@ public class SamController : MonoBehaviour
     public Text healthyText;
     public Text unhealthyText;
 
+    public Text streakText;
+
     private bool isJumping = false;
     private float distanceTraveled = 0.0f;
     private float jumpSpeed = 1.0f;
@@ -33,18 +35,31 @@ public class SamController : MonoBehaviour
     private Vector3 leftLanePos;
     private Vector3 middleLanePos;
     private Vector3 rightLanePos;
-    
+
+    private Vector3 scoreSize;  // Original size of the score labels.
+    private Vector3 streakSize;
+
+    private int healthyStreak = 0;
+        
     void Start()
     {
         charAnim = this.GetComponent<Animator>();
         leftLanePos = this.transform.position - new Vector3(0.5f, 0.0f, 0.0f);
         middleLanePos = this.transform.position;
         rightLanePos = this.transform.position + new Vector3(0.5f, 0.0f, 0.0f);
+        scoreSize = healthyText.transform.localScale;
+        streakSize = streakText.transform.localScale;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Resize text size elements if not at original size.
+        healthyText.transform.localScale = Vector3.Lerp(healthyText.transform.localScale, scoreSize, 2.0f * Time.deltaTime);
+        unhealthyText.transform.localScale = Vector3.Lerp(unhealthyText.transform.localScale, scoreSize, 2.0f * Time.deltaTime);
+        streakText.transform.localScale = Vector3.Lerp(streakText.transform.localScale, streakSize, 0.5f * Time.deltaTime);
+        streakText.color = Color.Lerp(streakText.color, Color.clear, 2.0f * Time.deltaTime);
+
         // Obtain vertical key input.
         float vertSpeed = Input.GetAxisRaw("Vertical");
 
@@ -93,9 +108,7 @@ public class SamController : MonoBehaviour
         else if(lane == 1)
         {
             if (isJumping)
-            {
-                // Vector3 position = middleLanePos;
-                // position.x = Mathf.Lerp(middleLanePos.x, (jumpDirection ? leftLanePos.x : rightLanePos.x), jumpSpeed * Time.deltaTime);
+            { 
                 Vector3 position = this.transform.position;
                 position.x += (jumpDirection ? 0.10f : -0.10f);
                 this.transform.position = position;
@@ -125,8 +138,6 @@ public class SamController : MonoBehaviour
         {
             if (isJumping)
             {
-                // Vector3 position = rightLanePos;
-                // position.x = Mathf.Lerp(rightLanePos.x, middleLanePos.x, jumpSpeed * Time.deltaTime);
                 Vector3 position = this.transform.position;
                 position.x += -0.10f;
                 this.transform.position = position;
@@ -142,18 +153,7 @@ public class SamController : MonoBehaviour
                 charAnim.speed = 0.1f;
             }
         }
-        
-        // Time slow effect.
-        if (Input.GetButtonDown("Time Stop"))
-        {
-            Time.timeScale = 0.3f;
-        }
-        
-        if(Input.GetButtonUp("Time Stop"))
-        {
-            Time.timeScale = 1.0f;
-        }
-        
+                
         // Based the character's speed, adjust the animation speed to match it.
         if(charAnim != null && !isJumping)
         {
@@ -185,7 +185,6 @@ public class SamController : MonoBehaviour
     /// <param name="food">Food that Sam collided with.</param>
     private void grabFood(Food food)
     {
-
         //creates an Audio Source on Sam if there isn't one already
         if (!GetComponent<AudioSource>())
             gameObject.AddComponent<AudioSource>();
@@ -201,22 +200,59 @@ public class SamController : MonoBehaviour
         if (food.isHealthy())
         {
             healthyFood++;
+            ++healthyStreak;
+            if (healthyStreak >= 3 && healthyStreak < 7)
+                ++healthyFood;
+            else if (healthyStreak >= 7 && healthyStreak < 12)
+                healthyFood += 2;
+            else if (healthyStreak >= 12 && healthyStreak < 20)
+                healthyFood += 3;
+            else if (healthyStreak >= 20)
+                healthyFood += 4;
             controller.updateScrollSpeed(1);
             healthyText.text = healthyFood.ToString();
+            healthyText.transform.localScale = scoreSize * 4.5f;
         }
 
         //checks if food is unhealthy, and if so increments counter and decreases speed
         else
         {
             unhealthyFood++;
+            healthyStreak = 0;
             controller.updateScrollSpeed(-1);
             unhealthyText.text = unhealthyFood.ToString();
+            unhealthyText.transform.localScale = scoreSize * 4.5f;
+        }
+
+        // Update streak text.
+        if(healthyStreak >= 3 && healthyStreak < 7)
+        {
+            streakText.text = "HEALTHY\n2X BONUS";
+            streakText.color = Color.white;
+            streakText.transform.localScale = streakSize * 1.5f;
+        }
+        else if(healthyStreak >= 7 && healthyStreak < 12)
+        {
+            streakText.text = "HEALTH MASTER\n3X BONUS";
+            streakText.color = Color.cyan;
+            streakText.transform.localScale = streakSize * 1.5f;
+        }
+        else if (healthyStreak >= 12 && healthyStreak < 20)
+        {
+            streakText.text = "HEALTH DEMI-GOD\n4X BONUS";
+            streakText.color = new Color(19, 239, 140);
+            streakText.transform.localScale = streakSize * 1.5f;
+        }
+        else if (healthyStreak >= 20)
+        {
+            streakText.text = "HEALTH GOD\n5X BONUS";
+            streakText.color = new Color(255, 173, 33);
+            streakText.transform.localScale = streakSize * 1.5f;
         }
 
         controller.updateScore(healthyFood);
         //removes the food from existence
         food.remove();
-
     }
 
     public float getSpeed()
